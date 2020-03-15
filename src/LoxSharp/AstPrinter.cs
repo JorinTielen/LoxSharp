@@ -10,10 +10,10 @@ namespace LoxSharp
             $"{expr.Name} = {expr.Val.Accept(this)}";
 
         public string Visit(Expr.Binary expr) =>
-            Parenthesize(expr.Op.lexeme, expr.Left, expr.Right);
+            Parenthesize(expr.Op.Lexeme, expr.Left, expr.Right);
 
         public string Visit(Expr.Get expr) =>
-            Parenthesize(".", expr.Obj, expr.Name.lexeme);
+            Parenthesize(".", expr.Obj, expr.Name.Lexeme);
 
         public string Visit(Expr.Call expr) =>
             Parenthesize("call", expr.Callee, expr.Args);
@@ -28,16 +28,16 @@ namespace LoxSharp
         }
 
         public string Visit(Expr.Logical expr) =>
-            Parenthesize(expr.Op.lexeme, expr.Left, expr.Right);
+            Parenthesize(expr.Op.Lexeme, expr.Left, expr.Right);
 
         public string Visit(Expr.Unary expr) =>
-            Parenthesize(expr.Op.lexeme, expr.Right);
+            Parenthesize(expr.Op.Lexeme, expr.Right);
 
         public string Visit(Expr.Variable expr) =>
-            expr.Name.lexeme;
+            expr.Name.Lexeme;
 
         public string Visit(Expr.Set expr) =>
-            Parenthesize("=", expr.Obj, expr.Name.lexeme, expr.Val); 
+            Parenthesize("=", expr.Obj, expr.Name.Lexeme, expr.Val); 
 
         public string Visit(Expr.Super expr) =>
             Parenthesize("super", expr.Method);
@@ -73,7 +73,7 @@ namespace LoxSharp
                 }
                 else if (part is Token)
                 {
-                    builder.Append(((Token)part).lexeme);
+                    builder.Append(((Token)part).Lexeme);
                 }
                 else
                 {
