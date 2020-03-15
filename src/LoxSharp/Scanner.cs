@@ -179,7 +179,7 @@ namespace LoxSharp
 
             Advance();
 
-            string value = source.Substring(start + 1, current - start);
+            string value = source.Substring(start + 1, current - start - 2);
             AddToken(STRING, value);
         }
 
