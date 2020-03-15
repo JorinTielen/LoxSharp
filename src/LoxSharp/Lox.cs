@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace LoxSharp 
+namespace LoxSharp
 {
-    class Lox 
+    class Lox
     {
         static bool HadError = false;
 
@@ -11,7 +12,7 @@ namespace LoxSharp
             if (args.Length > 1)
             {
                 Console.WriteLine("Usage: cslox [script]");
-            } 
+            }
             else if (args.Length == 1)
             {
                 RunFile(args[0]);
@@ -40,17 +41,34 @@ namespace LoxSharp
 
         static void Run(string source)
         {
-            // Scanner scanner = new Scanner(source);
-            // List<Token> tokens = scanner.ScanTokens();
+            Scanner scanner = new Scanner(source);
+            List<Token> tokens = scanner.ScanTokens();
 
-            // foreach (Token token in tokens) {
-            //     Console.WriteLine(token);
-            // }
+            Parser parser = new Parser(tokens);
+            Expr expression = parser.Parse();
+
+            if (HadError) return;
+
+            Console.WriteLine(new AstPrinter().Print(expression));
         }
 
-        public static void Error(int line, string message)
+        public static void Error(int line, string message) => Report(line, "", message);
+
+        public static void Error(Token token, string message)
         {
-            Console.WriteLine("[line " + line + "] Error: " + message);
+            if (token.Type == TokenType.EOF)
+            {
+                Report(token.Line, "at end", message);
+            }
+            else
+            {
+                Report(token.Line, $"at '{token.Lexeme}'", message);
+            }
+        }
+
+        public static void Report(int line, string where, string message)
+        {
+            Console.WriteLine($"[line {line} ] Error {where}: {message}");
             HadError = true;
         }
     }

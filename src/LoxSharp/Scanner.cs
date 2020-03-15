@@ -140,7 +140,7 @@ namespace LoxSharp
         {
             while (IsAlphaNumeric(Peek())) Advance();
 
-            string text = source.Substring(start, current);
+            string text = source.Substring(start, current - start);
 
             TokenType type = IDENTIFIER;
             keywords.TryGetValue(text, out type);
@@ -158,7 +158,7 @@ namespace LoxSharp
                 while (IsDigit(Peek())) Advance();
             }
 
-            double value = double.Parse(source.Substring(start, current));
+            double value = double.Parse(source.Substring(start, current - start));
             AddToken(NUMBER, value);
         }
 
@@ -178,13 +178,13 @@ namespace LoxSharp
 
             Advance();
 
-            string value = source.Substring(start + 1, current - 1);
+            string value = source.Substring(start + 1, current - start - 1);
             AddToken(STRING, value);
         }
 
         private void AddToken(TokenType type, object literal = null)
         {
-            string text = source.Substring(start, current);
+            string text = source.Substring(start, current - start);
             tokens.Add(new Token(type, text, literal, line));
         }
 
@@ -197,7 +197,7 @@ namespace LoxSharp
 
         private bool IsDigit(char c) => c >= '0' && c <= '9';
 
-        private bool IsAtEnd() => current >= source.Length;
+        private bool IsAtEnd() => current >= source.Length - 1;
     }
 }
 

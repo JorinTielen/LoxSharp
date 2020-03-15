@@ -4,7 +4,7 @@ namespace LoxSharp
 {
     public class AstPrinter : IExprVisitor<string>
     {
-        string Print(Expr expr) => expr.Accept(this);
+        public string Print(Expr expr) => expr.Accept(this);
     
         public string Visit(Expr.Assign expr) =>
             $"{expr.Name} = {expr.Val.Accept(this)}";
