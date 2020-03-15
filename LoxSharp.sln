@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{56033C6A-67D3-4AF1-87C5-A5EEDCBC64A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoxSharp", "src\LoxSharp\LoxSharp.csproj", "{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Debug|x64.Build.0 = Debug|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Debug|x86.Build.0 = Debug|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Release|x64.ActiveCfg = Release|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Release|x64.Build.0 = Release|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Release|x86.ActiveCfg = Release|Any CPU
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{12CA7793-2C1F-4CB2-90B1-5FA9ACFDFA32} = {56033C6A-67D3-4AF1-87C5-A5EEDCBC64A2}
+	EndGlobalSection
+EndGlobal

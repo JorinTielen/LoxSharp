@@ -1,0 +1,18 @@
+namespace LoxSharp 
+{
+   public enum TokenType
+   {
+       LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE,
+       COMMA, DOT, MINUS, PLUS, SEMICOLON, STAR, SLASH,
+
+       NEG, NE, EQ, ASSIGN, GREATER, GREATER_EQ,
+       LESS, LESS_EQ,
+
+       IDENTIFIER, STRING, NUMBER, THIS,
+
+       AND, OR, IF, ELSE, FOR, WHILE, CLASS, SUPER,
+       FUN, RETURN, VAR, NIL, TRUE, FALSE, PRINT,
+
+       EOF
+   }
+}
