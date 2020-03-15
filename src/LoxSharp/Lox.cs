@@ -1,11 +1,15 @@
-﻿using System;
+﻿using LoxSharp.Exceptions;
+using System;
 using System.Collections.Generic;
 
 namespace LoxSharp
 {
     class Lox
     {
+        private static readonly Interpreter interpreter = new Interpreter();
+
         static bool HadError = false;
+        static bool HadRuntimeError = false;
 
         static void Main(string[] args)
         {
@@ -27,6 +31,7 @@ namespace LoxSharp
         {
             Run(System.IO.File.ReadAllText(file));
             if (HadError) Environment.Exit(65);
+            if (HadRuntimeError) Environment.Exit(70);
         }
 
         static void RunPrompt()
@@ -50,6 +55,7 @@ namespace LoxSharp
             if (HadError) return;
 
             Console.WriteLine(new AstPrinter().Print(expression));
+            interpreter.Interpret(expression);
         }
 
         public static void Error(int line, string message) => Report(line, "", message);
@@ -66,9 +72,15 @@ namespace LoxSharp
             }
         }
 
+        public static void RuntimeError(RuntimeException e)
+        {
+            Console.WriteLine($"[line {e.Token.Line}] Runtime Error: {e.ToString()}");
+            HadRuntimeError = true;
+        }
+
         public static void Report(int line, string where, string message)
         {
-            Console.WriteLine($"[line {line} ] Error {where}: {message}");
+            Console.WriteLine($"[line {line}] Error {where}: {message}");
             HadError = true;
         }
     }

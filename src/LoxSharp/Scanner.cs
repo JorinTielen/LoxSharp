@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using static LoxSharp.TokenType;
 
 namespace LoxSharp
@@ -117,7 +118,7 @@ namespace LoxSharp
 
         private char Peek()
         {
-            if (!IsAtEnd()) return '\0';
+            if (IsAtEnd()) return '\0';
             return source[current];
         }
 
@@ -158,7 +159,7 @@ namespace LoxSharp
                 while (IsDigit(Peek())) Advance();
             }
 
-            double value = double.Parse(source.Substring(start, current - start));
+            double value = double.Parse(source.Substring(start, current - start), CultureInfo.InvariantCulture);
             AddToken(NUMBER, value);
         }
 
@@ -178,7 +179,7 @@ namespace LoxSharp
 
             Advance();
 
-            string value = source.Substring(start + 1, current - start - 1);
+            string value = source.Substring(start + 1, current - start);
             AddToken(STRING, value);
         }
 
