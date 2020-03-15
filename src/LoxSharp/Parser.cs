@@ -11,16 +11,35 @@ namespace LoxSharp
 
         public Parser(List<Token> tokens) => this.tokens = tokens;
 
-        public Expr Parse()
+        public List<Stmt> Parse()
         {
-            try
-            {
-                return Expression();
-            }
-            catch (ParseException)
-            {
-                return null;
-            }
+            var statements = new List<Stmt>();
+
+            while (!IsAtEnd())
+                statements.Add(Statement());
+
+            return statements;
+        }
+
+        private Stmt Statement()
+        {
+            if (Match(PRINT)) return PrintStatement();
+
+            return ExpressionStatement();
+        }
+
+        private Stmt PrintStatement()
+        {
+            Expr val = Expression();
+            Consume(SEMICOLON, "Expect ';' after expression");
+            return new Stmt.Print(val);
+        }
+
+        private Stmt ExpressionStatement()
+        {
+            Expr expr = Expression();
+            Consume(SEMICOLON, "Expect ';' after expression");
+            return new Stmt.Expression(expr);
         }
 
         private Expr Expression() => Equality();

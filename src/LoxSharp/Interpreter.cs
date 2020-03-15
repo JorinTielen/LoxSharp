@@ -1,23 +1,44 @@
 ﻿using LoxSharp.Exceptions;
 using System;
+using System.Collections.Generic;
 using static LoxSharp.TokenType;
 
 namespace LoxSharp
 {
-    class Interpreter : IExprVisitor<object>
+    class Interpreter : IExprVisitor<object>, IStmtVisitor<object>
     {
-        public void Interpret(Expr expr)
+        public void Interpret(List<Stmt> statements)
         {
             try
             {
-                object val = Evaluate(expr);
-                Console.WriteLine(Stringify(val));
+                foreach (Stmt statement in statements)
+                {
+                    Execute(statement);
+                }
             }
             catch (RuntimeException e)
             {
                 Lox.RuntimeError(e);
             }
         }
+
+        private void Execute(Stmt stmt) => stmt.Accept(this);
+
+        private object Evaluate(Expr expr) => expr.Accept(this);
+
+        public object Visit(Stmt.Expression stmt)
+        {
+            Evaluate(stmt.Expr);
+            return null;
+        }
+
+        public object Visit(Stmt.Print stmt)
+        {
+            object val = Evaluate(stmt.Expr);
+            Console.WriteLine(Stringify(val));
+            return null;
+        }
+
         public object Visit(Expr.Literal expr) => expr.Val;
 
         public object Visit(Expr.Grouping expr) => Evaluate(expr.Expression);
@@ -177,7 +198,5 @@ namespace LoxSharp
             if (operand is double) return;
             throw new RuntimeException(op, "Operand must be a number.");
         }
-
-        private object Evaluate(Expr expr) => expr.Accept(this);
     }
 }

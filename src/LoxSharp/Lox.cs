@@ -50,12 +50,12 @@ namespace LoxSharp
             List<Token> tokens = scanner.ScanTokens();
 
             Parser parser = new Parser(tokens);
-            Expr expression = parser.Parse();
+            List<Stmt> statements = parser.Parse();
 
             if (HadError) return;
 
-            Console.WriteLine(new AstPrinter().Print(expression));
-            interpreter.Interpret(expression);
+            // Console.WriteLine(new AstPrinter().Print(expression));
+            interpreter.Interpret(statements);
         }
 
         public static void Error(int line, string message) => Report(line, "", message);
